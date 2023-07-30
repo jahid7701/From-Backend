@@ -13,13 +13,10 @@ try{
   const newStudent= new Resultmodel (req.body);
   const hasib=await newStudent.save();
   res.status(201).send(hasib);
-
-}
+   }
 catch(error){
 res.status(201).send({message:error.message});
-}
-
-
+            }
 })
 app.get("/student",async(req,res)=>{
 const resultm=await Resultmodel.find()
@@ -35,7 +32,6 @@ try{
         registration:req.body.registration
       }
     },{new:true}
-
   )
   if(updateresult){
     res.status(404).send({
@@ -48,26 +44,17 @@ try{
     res.status(404).send({
       success:false,
       message:" was not updateupdated succesfully",
-   
   });
-
+      }
 }
-}
-
 catch(error){
   res.status(404).send({message:error.message})
 }
-  });
-  
+  }); 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
   .then(() => console.log('Connected!'))
   .catch(()=>{console.log("Disconnected")});
-
-
-
-
-app.delete("/delete/:id",async(req,res)=>{
- 
+app.delete("/delete/:id",async(req,res)=>{ 
   try{
     const id=req.params.id;
     const product=await Resultmodel.deleteOne({_id:id})
@@ -81,15 +68,11 @@ app.delete("/delete/:id",async(req,res)=>{
     else{
       res.status(404).send({
         success:false,
-        message:" was not deleted succesfully",
-     
+        message:" was not deleted succesfully",    
     });
-  
   }
   }catch(error){
     res.status(404).send({message:error.message})
-  
   }
 })
-
 module.exports=app;
